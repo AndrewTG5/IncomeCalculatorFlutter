@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:income_calculator/income.dart';
+import 'package:income_calculator/data/income.dart';
 
 void main() {
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:income_calculator/income.dart';
+import 'package:income_calculator/data/income.dart';
 
 class IncomeViewModel extends ChangeNotifier {
    Income? _income;
