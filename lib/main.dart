@@ -113,30 +113,34 @@ class _IncomeWidgetState extends State<IncomeWidget> {
             ),
           ],
         ),
-        DropdownButton<int>(
-          value: _kiwiSaver,
-          onChanged: (int? newValue) {
-            setState(() {
-              _kiwiSaver = newValue!;
-            });
-          },
-          items: List<int>.generate(11, (int index) => index).map<DropdownMenuItem<int>>((int value) {
-            return DropdownMenuItem<int>(
-              value: value,
-              child: Text('$value%'),
-            );
-          }).toList(),
-        ),
         Row(
           children: [
-            const Text('Student Loan'),
-            Checkbox(
-              value: _studentLoan,
-              onChanged: (bool? newValue) {
+            DropdownButton<int>(
+              value: _kiwiSaver,
+              onChanged: (int? newValue) {
                 setState(() {
-                  _studentLoan = newValue!;
+                  _kiwiSaver = newValue!;
                 });
               },
+              items: List<int>.generate(11, (int index) => index).map<DropdownMenuItem<int>>((int value) {
+                return DropdownMenuItem<int>(
+                  value: value,
+                  child: Text('$value%'),
+                );
+              }).toList(),
+            ),
+            Row(
+              children: [
+                const Text('Student Loan'),
+                Checkbox(
+                  value: _studentLoan,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      _studentLoan = newValue!;
+                    });
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -157,72 +161,81 @@ class IncomeTable extends StatelessWidget {
       return const SizedBox();
     }
 
-    return Table(
-      children: <TableRow>[
-        TableRow(
-          children: <Widget>[
-            const Text('Gross'),
-            Text(income.grossHourly.toString()),
-            Text(income.grossDaily.toString()),
-            Text(income.grossWeekly.toString()),
-            Text(income.grossFortnightly.toString()),
-            Text(income.grossMonthly.toString()),
-            Text(income.grossYearly.toString()),
+    return DataTable(
+      columns: const <DataColumn>[
+        DataColumn(label: Text('')),
+        DataColumn(label: Text('Hourly')),
+        DataColumn(label: Text('Daily')),
+        DataColumn(label: Text('Weekly')),
+        DataColumn(label: Text('Fortnightly')),
+        DataColumn(label: Text('Monthly')),
+        DataColumn(label: Text('Yearly')),
+      ],
+  rows: <DataRow>[
+        DataRow(
+          cells: <DataCell>[
+            const DataCell(Text('Gross')),
+            DataCell(Text(Income.formatAsCurrency(income.grossHourly))),
+            DataCell(Text(Income.formatAsCurrency(income.grossDaily))),
+            DataCell(Text(Income.formatAsCurrency(income.grossWeekly))),
+            DataCell(Text(Income.formatAsCurrency(income.grossFortnightly))),
+            DataCell(Text(Income.formatAsCurrency(income.grossMonthly))),
+            DataCell(Text(Income.formatAsCurrency(income.grossYearly))),
           ],
         ),
-        TableRow(
-          children: <Widget>[
-            const Text('PAYE'),
-            Text(income.payeHourly.toString()),
-            Text(income.payeDaily.toString()),
-            Text(income.payeWeekly.toString()),
-            Text(income.payeFortnightly.toString()),
-            Text(income.payeMonthly.toString()),
-            Text(income.payeYearly.toString()),
+        DataRow(
+          cells: <DataCell>[
+            const DataCell(Text('PAYE')),
+            DataCell(Text(Income.formatAsCurrency(income.payeHourly))),
+            DataCell(Text(Income.formatAsCurrency(income.payeDaily))),
+            DataCell(Text(Income.formatAsCurrency(income.payeWeekly))),
+            DataCell(Text(Income.formatAsCurrency(income.payeFortnightly))),
+            DataCell(Text(Income.formatAsCurrency(income.payeMonthly))),
+            DataCell(Text(Income.formatAsCurrency(income.payeYearly))),
           ],
         ),
-        TableRow(
-          children: <Widget>[
-            const Text('ACC'),
-            Text(income.accHourly.toString()),
-            Text(income.accDaily.toString()),
-            Text(income.accWeekly.toString()),
-            Text(income.accFortnightly.toString()),
-            Text(income.accMonthly.toString()),
-            Text(income.accYearly.toString()),
+        DataRow(
+          cells: <DataCell>[
+            const DataCell(Text('ACC')),
+            DataCell(Text(Income.formatAsCurrency(income.accHourly))),
+            DataCell(Text(Income.formatAsCurrency(income.accDaily))),
+            DataCell(Text(Income.formatAsCurrency(income.accWeekly))),
+            DataCell(Text(Income.formatAsCurrency(income.accFortnightly))),
+            DataCell(Text(Income.formatAsCurrency(income.accMonthly))),
+            DataCell(Text(Income.formatAsCurrency(income.accYearly))),
           ],
         ),
-        TableRow(
-          children: <Widget>[
-            const Text('KiwiSaver'),
-            Text(income.kiwiSaverHourly.toString()),
-            Text(income.kiwiSaverDaily.toString()),
-            Text(income.kiwiSaverWeekly.toString()),
-            Text(income.kiwiSaverFortnightly.toString()),
-            Text(income.kiwiSaverMonthly.toString()),
-            Text(income.kiwiSaverYearly.toString()),
+        DataRow(
+          cells: <DataCell>[
+            const DataCell(Text('KiwiSaver')),
+            DataCell(Text(Income.formatAsCurrency(income.kiwiSaverHourly))),
+            DataCell(Text(Income.formatAsCurrency(income.kiwiSaverDaily))),
+            DataCell(Text(Income.formatAsCurrency(income.kiwiSaverWeekly))),
+            DataCell(Text(Income.formatAsCurrency(income.kiwiSaverFortnightly))),
+            DataCell(Text(Income.formatAsCurrency(income.kiwiSaverMonthly))),
+            DataCell(Text(Income.formatAsCurrency(income.kiwiSaverYearly))),
           ],
         ),
-        TableRow(
-          children: <Widget>[
-            const Text('Student Loan'),
-            Text(income.studentLoanHourly.toString()),
-            Text(income.studentLoanDaily.toString()),
-            Text(income.studentLoanWeekly.toString()),
-            Text(income.studentLoanFortnightly.toString()),
-            Text(income.studentLoanMonthly.toString()),
-            Text(income.studentLoanYearly.toString()),
+        DataRow(
+          cells: <DataCell>[
+            const DataCell(Text('Student Loan')),
+            DataCell(Text(Income.formatAsCurrency(income.studentLoanHourly))),
+            DataCell(Text(Income.formatAsCurrency(income.studentLoanDaily))),
+            DataCell(Text(Income.formatAsCurrency(income.studentLoanWeekly))),
+            DataCell(Text(Income.formatAsCurrency(income.studentLoanFortnightly))),
+            DataCell(Text(Income.formatAsCurrency(income.studentLoanMonthly))),
+            DataCell(Text(Income.formatAsCurrency(income.studentLoanYearly))),
           ],
         ),
-        TableRow(
-          children: <Widget>[
-            const Text('Net'),
-            Text(income.netHourly.toString()),
-            Text(income.netDaily.toString()),
-            Text(income.netWeekly.toString()),
-            Text(income.netFortnightly.toString()),
-            Text(income.netMonthly.toString()),
-            Text(income.netYearly.toString()),
+        DataRow(
+          cells: <DataCell>[
+            const DataCell(Text('Net')),
+            DataCell(Text(Income.formatAsCurrency(income.netHourly))),
+            DataCell(Text(Income.formatAsCurrency(income.netDaily))),
+            DataCell(Text(Income.formatAsCurrency(income.netWeekly))),
+            DataCell(Text(Income.formatAsCurrency(income.netFortnightly))),
+            DataCell(Text(Income.formatAsCurrency(income.netMonthly))),
+            DataCell(Text(Income.formatAsCurrency(income.netYearly))),
           ],
         ),
       ],
