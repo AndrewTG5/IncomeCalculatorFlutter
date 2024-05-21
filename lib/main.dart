@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:income_calculator/screens/income_page.dart';
+import 'package:income_calculator/screens/budget_page.dart';
 
 void main() {
   runApp(
@@ -43,7 +44,7 @@ class _MainState extends State<Main> {
         ),
         body: <Widget>[
           const IncomePage(),
-          const Text('Budget'),
+          const BudgetPage(),
           const Text('Saving'),
         ][_currentPageIndex],
         bottomNavigationBar: NavigationBar(

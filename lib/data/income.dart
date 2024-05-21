@@ -1,7 +1,5 @@
 library income;
 
-import 'package:intl/intl.dart';
-
 enum IncomePeriod { hour, day, week, fortnight, month, year }
 
 class TaxThreshold {
@@ -78,7 +76,7 @@ class Income {
   late final double studentLoanYearly;
   late final double netYearly;
 
-  Income({required double income, required IncomePeriod period, int kiwiSaver = 0, bool studentLoan = false}) {
+  Income({required double income, required IncomePeriod period, int kiwiSaver = 0, bool studentLoan = false}) { //TODO: holiday pay
     _income = income;
     _period = period;
     _kiwiSaver = kiwiSaver;
@@ -146,16 +144,6 @@ class Income {
     netWeekly = netYearly / 52;
     netDaily = netYearly / 260;
     netHourly = netYearly / 2080;
-  }
-
-  static double roundToTwoDecimalPlaces(double value) {
-    return double.parse(value.toStringAsFixed(2));
-  }
-
-  /// Format the value as a currency, for example, 1234.56 will be formatted as 1,234.56
-  static String formatAsCurrency(double value) {
-    final nzd = NumberFormat("#,##0.00", "en_NZ");
-    return nzd.format(roundToTwoDecimalPlaces(value));
   }
 
   /// Guess the period of the income based on the amount, for example, if the income is $75000, it is likely to be yearly, or if it is $35, it is likely to be hourly
